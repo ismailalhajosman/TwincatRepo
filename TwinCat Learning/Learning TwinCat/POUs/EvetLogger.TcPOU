@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="EvetLogger" Id="{ec2493a7-1fbe-48bd-880f-1b243969ed21}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EvetLogger
+VAR
+	EventBuffer : ARRAY [1..MaxNumberOfArray] OF ST_Events;
+	CurrentBufferEntry : INT := 1;
+END_VAR
+VAR CONSTANT
+	MaxNumberOfArray : INT := 100;
+END_VAR 
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddEvent" Id="{076bde83-de45-4a65-b1f5-bf50b435044c}">
+      <Declaration><![CDATA[METHOD PUBLIC AddEvent : BOOL
+VAR_INPUT
+	eEventType : E_EventType;
+	eEventSeverity : TcEventSeverity;
+	eEventIdentity : UDINT;
+	eEventText : STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT IsBufferFull() THEN
+	CurrentBufferEntry := CurrentBufferEntry +1 ;
+	EventBuffer [CurrentBufferEntry].eEventType := eEventType;
+	EventBuffer [CurrentBufferEntry].eEventIdentity := eEventIdentity;
+	EventBuffer [CurrentBufferEntry].eEventSeverity := eEventSeverity;
+	EventBuffer [CurrentBufferEntry].eEventText := eEventText;
+	FUpdateEventTimeStampedWithSystemTimeStamepd(EventBuffer [CurrentBufferEntry]);
+	AddEvent := TRUE;
+ELSE 
+	AddEvent := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="IsBufferFull" Id="{244cae99-4afa-410e-b1be-9449ca8ea731}">
+      <Declaration><![CDATA[METHOD PUBLIC IsBufferFull : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (CurrentBufferEntry + 1) > MaxNumberOfArray THEN
+	IsBufferFull := TRUE;
+ELSE 
+	IsBufferFull := FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="EvetLogger">
+      <LineId Id="17" Count="0" />
+    </LineIds>
+    <LineIds Name="EvetLogger.AddEvent">
+      <LineId Id="5" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="15" Count="2" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="12" Count="1" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="EvetLogger.IsBufferFull">
+      <LineId Id="6" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
