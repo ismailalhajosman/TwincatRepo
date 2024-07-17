@@ -1,2 +1,0 @@
-# TwincatRepo
-Twincat PLC Projects 
