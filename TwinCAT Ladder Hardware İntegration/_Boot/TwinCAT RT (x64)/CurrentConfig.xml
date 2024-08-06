@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcBootProject CreateTime="2024-07-18T06:29:07">
+<TcBootProject CreateTime="2024-08-06T14:37:41">
 	<System>
 		<LockedMemSize>33554432</LockedMemSize>
 		<AffinityMask>#x1</AffinityMask>
@@ -357,7 +357,7 @@
 	<ProjectInfo>
 		<ProjectName>PLC code</ProjectName>
 		<ProjectGuid>{95E671A2-22DC-4A90-9EA7-C2D63E242EFA}</ProjectGuid>
-		<ConfigurationFile>C:\Users\PC\Music\Beckhoff PLC Program New [increase communication rate]\TwinCAT Ladder Hardware İntegration\TwinCAT Ladder Hardware İntegration.tsproj</ConfigurationFile>
+		<ConfigurationFile>C:\Users\PC\Music\TwincatRepo\TwinCAT Ladder Hardware İntegration\PLC code.tsproj</ConfigurationFile>
 		<DataTypes/>
 		<PlcProjects/>
 		<Tasks/>
