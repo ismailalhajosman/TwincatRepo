@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="SYSTEM" Id="{5993af88-c718-4771-85b6-f8eb292e92b8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM SYSTEM
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GVL.GetLocalSystemTime(
+	sNetID := ,
+	bEnable := TRUE,
+	dwCycle := 1,
+	dwOpt:= ,
+	tTimeout:= ,
+	bValid =>,
+	systemTime=>,
+	tzID=>);
+	
+GVL.SystemDateTime := SYSTEMTIME_TO_STRING(GVL.GetLocalSystemTime.systemTime);
+GVL.SystemDate := MID(STR:= GVL.SystemDateTime,LEN:=10,POS:=1);
+GVL.SystemTime := MID(STR:= GVL.SystemDateTime,LEN:=8,POS:=12);
+GVL.SystemMinutes := MID(STR:= GVL.SystemDateTime,LEN:=2,POS:=15);
+GVL.SystemSeconds := MID(STR:= GVL.SystemDateTime,LEN:=2,POS:=18);]]></ST>
+    </Implementation>
+    <LineIds Name="SYSTEM">
+      <LineId Id="6" Count="11" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="21" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
